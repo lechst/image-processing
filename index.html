@@ -5,18 +5,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Simple Image Processing</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+        #divAPI {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width:100vw;
+            height:100vh;
+        }
+        #canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width:100vw;
+            height:100vh;
+        }
+        div.menu {
+            width: 450px;
+            display: block;
+            position: absolute;
+            z-index: 20;
+            top: 0;
+            right: 0;
+            margin: 20px;
+        }
+        #fileUpload {
+            display: block;
+            position: absolute;
+            z-index: 20;
+            top: 0;
+            left: 0;
+            margin: 20px;
+        }
+    </style>
 </head>
 
 
 <body>
 
+<div id="divAPI">
+    <input type="file" id="fileUpload" />
+    <canvas id="canvas"></canvas>
+</div>
 
-<input type="file" id="fileUpload" />
-<canvas id="canvas" width="900" height="600"></canvas>
+<div id="menu" class="menu"></div>
+
+<script type="text/javascript" src="dat.gui.min.js"></script>
+<script type="text/javascript" src="api.js"></script>
+<script type="text/javascript" src="demo.js"></script>
 
 
 <script>
-
 	function getElement( id ){
 		return document.getElementById(id);
 	}
@@ -30,7 +75,7 @@
 			FR.onload = function(e) {
 				var img = new Image();
 				img.addEventListener("load", function() {
-					context.drawImage(img, 0, 0);
+					context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
 				});
 				img.src = e.target.result;
 			};
@@ -38,8 +83,7 @@
 		}
 	}
 
-    getElement("fileUpload").addEventListener("change", readImage, false);
-
+	getElement("fileUpload").addEventListener("change", readImage, false);
 </script>
 
 
